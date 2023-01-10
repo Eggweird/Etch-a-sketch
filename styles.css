@@ -3,10 +3,10 @@
   grid-template-rows: repeat(16, 1fr);
   grid-template-columns: repeat(16, 1fr);
   background-color: gray;
+  border: 2px solid black;
   height: 500px;
   width: 500px;
 }
 .cell {
   background-color: white;
-  border: 1px solid black;
 }
