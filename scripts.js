@@ -1,10 +1,6 @@
-const DEFAULT_GRID = 16;
-const DEFAULT_MODE = "color";
-const DEFAULT_COLOR = "#333333";
-
-let currentGrid = DEFAULT_GRID;
-let currentMode = DEFAULT_MODE;
-let currentColor = DEFAULT_COLOR;
+let currentGrid = 16;
+let currentMode = "color";
+let currentColor = "#333333";
 
 function setCurrentColor(newColor) {
   currentColor = newColor;
@@ -111,6 +107,7 @@ function changeColor(input) {
   }
 }
 
+//adds a classlist of active to showcase which button is active with use of CSS
 function activeButton(mode) {
   if (currentMode === "rgb") {
     rgbButton.classList.remove("active");
@@ -129,5 +126,5 @@ function activeButton(mode) {
   }
 }
 
-createGrid(DEFAULT_GRID);
-activeButton(DEFAULT_MODE);
+createGrid(16);
+activeButton("color");
