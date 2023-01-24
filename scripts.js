@@ -1,19 +1,25 @@
+//default values here
 let currentGrid = 16;
 let currentMode = "color";
 let currentColor = "#000000";
 
+//set currentColor to new chosen color
 function setCurrentColor(newColor) {
   currentColor = newColor;
 }
 
+//set active button toggle to new mode and current mode to new mode
 function setMode(newMode) {
   activeButton(newMode);
   currentMode = newMode;
 }
 
+//set currentGrid to newSize
 function setGridSize(newSize) {
   currentGrid = newSize;
 }
+
+//creation of constants based on its id/class utilizing queryselector
 const grid = document.querySelector(".grid-container");
 const colorChooser = document.querySelector("#color-chooser");
 const clearButton = document.querySelector("#clear-button");
@@ -23,6 +29,8 @@ const rgbButton = document.querySelector("#rgb-button");
 const colorButton = document.querySelector("#color-button");
 const eraserButton = document.querySelector("#eraser-button");
 
+//lines 33-59 will give each button an addeventlistener
+//and function based on needs of what button should do
 colorChooser.addEventListener("input", function (input) {
   setCurrentColor(input.target.value);
 });
@@ -52,30 +60,39 @@ clearButton.addEventListener("click", () => {
 });
 
 //This chunk of code is created to give mouseDown a boolean value
-//This will be used later for addeventlistener
+//This will be used for addeventlistener
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
+//this will update grid text accordingly to slider input value
 function updateSliderText(value) {
   sliderVal.innerHTML = `${value} x ${value}`;
 }
 
+//this will update gridsize, slidertext, and will clear the grid
 function sizeChange(value) {
   setGridSize(value);
   updateSliderText(value);
   refreshPage();
 }
 
+//This will delete the columns/rows div within grid to nothing
 function clearGrid() {
   grid.innerHTML = "";
 }
 
+//Utilize clearGrid that will make the grid empty then create grid again with value of current grid
 function refreshPage() {
   clearGrid();
   createGrid(currentGrid);
 }
 
+//Take the value and create rows and columns based on value,
+//utilizing for loops to create div based on value*value and class
+//as well for each div called cell. Then allow each cell to be able
+//to change color based off of mouseover/mousedown, appending to add
+//everything into the grid div
 function createGrid(value) {
   grid.style.gridTemplateRows = `repeat(${value}, 1fr)`;
   grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
@@ -89,11 +106,17 @@ function createGrid(value) {
   }
 }
 
+//Based on the input if rgb it will create random rgb values per cell
+//if color it will fill each cell with color chosen from rgb color plate
+//if eraser it will fill each cell with white
 function changeColor(input) {
+  //this if statement is to not have mouse hover constantly color the cells
+  //it will need to have a mousedown as well. In this case if input type
+  //is moueover and not mousedown instead of coloring the cell it will
+  //just return
   if (input.type === "mouseover" && !mouseDown) {
     return;
   }
-
   if (currentMode === "rgb") {
     var r = Math.floor(Math.random() * 256);
     var g = Math.floor(Math.random() * 256);
@@ -108,6 +131,7 @@ function changeColor(input) {
 }
 
 //adds a classlist of active to showcase which button is active with use of CSS
+//active is what will be given to the class of each button or removed
 function activeButton(mode) {
   if (currentMode === "rgb") {
     rgbButton.classList.remove("active");
@@ -126,5 +150,6 @@ function activeButton(mode) {
   }
 }
 
-createGrid(16);
-activeButton("color");
+//initial load of site will set createGrid and activeButton with default value above
+createGrid(currentGrid);
+activeButton(currentMode);
