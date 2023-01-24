@@ -1,65 +1,113 @@
+const DEFAULT_GRID = 16;
+const DEFAULT_MODE = "color";
+const DEFAULT_COLOR = "#333333";
+
+let currentGrid = DEFAULT_GRID;
+let currentMode = DEFAULT_MODE;
+let currentColor = DEFAULT_COLOR;
+
+function setCurrentColor(newColor) {
+  currentColor = newColor;
+}
+
+function setMode(newMode) {
+  activeButton(newMode);
+  currentMode = newMode;
+}
+
+function setGridSize(newSize) {
+  currentGrid = newSize;
+}
+const grid = document.querySelector(".grid-container");
+const colorChooser = document.querySelector("#color-chooser");
+const clearButton = document.querySelector("#clear-button");
+const slider = document.querySelector(".slider");
+const sliderVal = document.querySelector(".slider-value");
+const rgbButton = document.querySelector("#rgb-button");
+const colorButton = document.querySelector("#color-button");
+const eraserButton = document.querySelector("#eraser-button");
+
+colorChooser.oninput = (input) => setCurrentColor(input.target.value);
+colorButton.onclick = () => setMode("color");
+rgbButton.onclick = () => setMode("rgb");
+eraserButton.onclick = () => setMode("eraser");
+slider.onmousemove = (input) => updateSliderText(input.target.value);
+slider.onchange = (input) => sizeChange(input.target.value);
+clearButton.onclick = () => refreshPage();
+
 //This chunk of code is created to give mouseDown a boolean value
 //This will be used later for addeventlistener
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
-//removes child node, in this case iniitial grid 16x16
-function removeAllChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
+function updateSliderText(value) {
+  sliderVal.innerHTML = `${value} x ${value}`;
+}
+
+function sizeChange(value) {
+  setGridSize(value);
+  updateSliderText(value);
+  refreshPage();
+}
+
+function clearGrid() {
+  grid.innerHTML = "";
+}
+
+function refreshPage() {
+  clearGrid();
+  createGrid(currentGrid);
+}
+
+function createGrid(value) {
+  grid.style.gridTemplateRows = `repeat(${value}, 1fr)`;
+  grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
+
+  for (let i = 0; i < value * value; i++) {
+    const gridDiv = document.createElement("div");
+    gridDiv.classList.add("cell");
+    gridDiv.addEventListener("mouseover", changeColor);
+    gridDiv.addEventListener("mousedown", changeColor);
+    grid.appendChild(gridDiv);
   }
 }
 
-const grid = document.querySelector(".grid-container");
-//Initial grid creation of 16x16 when first time opening
-function createGrid(val) {
-  for (let i = 0; i < val * val; i++) {
-    draw();
+function changeColor(input) {
+  if (input.type === "mouseover" && !mouseDown) {
+    return;
+  }
+
+  if (currentMode === "rgb") {
+    var r = Math.floor(Math.random() * 256);
+    var g = Math.floor(Math.random() * 256);
+    var b = Math.floor(Math.random() * 256);
+    var RGBColor = `rgb(${r}, ${g}, ${b})`;
+    input.target.style.backgroundColor = RGBColor;
+  } else if (currentMode === "color") {
+    input.target.style.backgroundColor = currentColor;
+  } else if (currentMode === "eraser") {
+    input.target.style.backgroundColor = "#FFFFFF";
   }
 }
 
-const clearButton = document.querySelector("#clear-button");
-//Button event that will clear the entire grid
-clearButton.addEventListener("click", () => {
-  let cells = grid.children;
-  let val = document.getElementById("sliderId").value;
-  for (let i = 0; i < val * val; i++) {
-    cells[i].style.backgroundColor = "white";
+function activeButton(mode) {
+  if (currentMode === "rgb") {
+    rgbButton.classList.remove("active");
+  } else if (currentMode === "color") {
+    colorButton.classList.remove("active");
+  } else if (currentMode === "eraser") {
+    eraserButton.classList.remove("active");
   }
-});
 
-//Draw function that will allow user to draw via mouse down and mouse over
-function draw() {
-  const gridDiv = document.createElement("div");
-  gridDiv.classList.add("cell");
-  //this chunk of code makes the event listener become
-  //sort of like a click and hold function
-  gridDiv.addEventListener("mouseover", function (e) {
-    if (e.type === "mouseover" && !mouseDown) return;
-    e.target.style.backgroundColor = "black";
-  });
-  gridDiv.addEventListener("mousedown", function (e) {
-    if (e.type === "mouseover" && !mouseDown) return;
-    e.target.style.backgroundColor = "black";
-  });
-  grid.appendChild(gridDiv);
+  if (mode === "rgb") {
+    rgbButton.classList.add("active");
+  } else if (mode === "color") {
+    colorButton.classList.add("active");
+  } else if (mode === "eraser") {
+    eraserButton.classList.add("active");
+  }
 }
 
-const slider = document.querySelector(".slider");
-const sliderVal = document.querySelector(".slider-value");
-
-//Slider that will populate the grid with its value chosen val x val
-slider.addEventListener("input", function () {
-  //have to use element by ID to get value . element by class name gives an
-  //array so can not get value
-  let val = document.getElementById("sliderId").value;
-  sliderVal.innerHTML = `${val} x ${val}`;
-  removeAllChildNodes(grid);
-  grid.style.gridTemplateRows = `repeat(${val}, 1fr)`;
-  grid.style.gridTemplateColumns = `repeat(${val}, 1fr)`;
-  createGrid(val);
-});
-
-//Initial grid creation 16x16
-createGrid(16);
+createGrid(DEFAULT_GRID);
+activeButton(DEFAULT_MODE);
