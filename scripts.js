@@ -1,6 +1,6 @@
 let currentGrid = 16;
 let currentMode = "color";
-let currentColor = "#333333";
+let currentColor = "#000000";
 
 function setCurrentColor(newColor) {
   currentColor = newColor;
