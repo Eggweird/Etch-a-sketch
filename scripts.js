@@ -27,13 +27,33 @@ const rgbButton = document.querySelector("#rgb-button");
 const colorButton = document.querySelector("#color-button");
 const eraserButton = document.querySelector("#eraser-button");
 
-colorChooser.oninput = (input) => setCurrentColor(input.target.value);
-colorButton.onclick = () => setMode("color");
-rgbButton.onclick = () => setMode("rgb");
-eraserButton.onclick = () => setMode("eraser");
-slider.onmousemove = (input) => updateSliderText(input.target.value);
-slider.onchange = (input) => sizeChange(input.target.value);
-clearButton.onclick = () => refreshPage();
+colorChooser.addEventListener("input", function (input) {
+  setCurrentColor(input.target.value);
+});
+
+colorButton.addEventListener("click", () => {
+  setMode("color");
+});
+
+rgbButton.addEventListener("click", () => {
+  setMode("rgb");
+});
+
+eraserButton.addEventListener("click", () => {
+  setMode("eraser");
+});
+
+slider.addEventListener("mousemove", function (input) {
+  updateSliderText(input.target.value);
+});
+
+slider.addEventListener("change", function (input) {
+  sizeChange(input.target.value);
+});
+
+clearButton.addEventListener("click", () => {
+  refreshPage();
+});
 
 //This chunk of code is created to give mouseDown a boolean value
 //This will be used later for addeventlistener
