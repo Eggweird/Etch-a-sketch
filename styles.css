@@ -25,3 +25,7 @@ body {
 button.active {
   background-color: grey;
 }
+
+.gridButton.active {
+  background-color: skyblue;
+}

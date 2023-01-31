@@ -2,6 +2,7 @@
 let currentGrid = 16;
 let currentMode = "color";
 let currentColor = "#000000";
+let currentGridToggle = "16x16";
 
 //set currentColor to new chosen color
 function setCurrentColor(newColor) {
@@ -12,6 +13,12 @@ function setCurrentColor(newColor) {
 function setMode(newMode) {
   activeButton(newMode);
   currentMode = newMode;
+}
+
+//set active grid button toggle to active
+function setGridToggle(newGridToggle) {
+  activeGrid(newGridToggle);
+  currentGridToggle = newGridToggle;
 }
 
 //set currentGrid to newSize
@@ -56,12 +63,15 @@ clearButton.addEventListener("click", () => {
 
 button16.addEventListener("click", () => {
   sizeChange(16);
+  setGridToggle("16x16");
 });
 button32.addEventListener("click", () => {
   sizeChange(32);
+  setGridToggle("32x32");
 });
 button64.addEventListener("click", () => {
   sizeChange(64);
+  setGridToggle("64x64");
 });
 
 //This chunk of code is created to give mouseDown a boolean value
@@ -150,6 +160,27 @@ function activeButton(mode) {
   }
 }
 
+//Function will give toggle color to button that is
+//active for which size grid is chosen.
+function activeGrid(gridDescription) {
+  if (currentGridToggle === "16x16") {
+    button16.classList.remove("active");
+  } else if (currentGridToggle === "32x32") {
+    button32.classList.remove("active");
+  } else if (currentGridToggle === "64x64") {
+    button64.classList.remove("active");
+  }
+
+  if (gridDescription === "16x16") {
+    button16.classList.add("active");
+  } else if (gridDescription === "32x32") {
+    button32.classList.add("active");
+  } else if (gridDescription === "64x64") {
+    button64.classList.add("active");
+  }
+}
+
 //initial load of site will set createGrid and activeButton with default value above
 createGrid(currentGrid);
 activeButton(currentMode);
+activeGrid(currentGridToggle);
