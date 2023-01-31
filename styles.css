@@ -1,12 +1,19 @@
-body {
+.container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  flex-direction: column;
+  gap: 200px;
+  margin: 0 auto;
+  max-width: 1300px;
 }
-
+.title {
+  text-align: center;
+}
 .navbar {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
 }
 .grid-container {
   display: inline-grid;
@@ -16,6 +23,16 @@ body {
   border: 2px solid black;
   height: 600px;
   width: 600px;
+}
+button {
+  padding: 10px 5px;
+  margin: 2px 1px;
+  margin-left: 0;
+}
+.gridButton-container {
+  padding: 2px 2px;
+  margin: 2px 1px;
+  margin-left: 0;
 }
 .cell {
   background-color: white;
@@ -28,4 +45,7 @@ button.active {
 
 .gridButton.active {
   background-color: skyblue;
+}
+.footer {
+  text-align: center;
 }

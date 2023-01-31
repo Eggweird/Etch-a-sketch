@@ -13,17 +13,21 @@
     <header>
       <h1 class="title">Etch-a-sketch</h1>
     </header>
-    <div class="navbar">
-      <input id="color-chooser" type="color" value="#000000" />
-      <button id="color-button">Choose Color</button>
-      <button id="rgb-button">Random Color</button>
-      <button id="eraser-button">Eraser</button>
-      <button id="clear-button">Clear</button>
-      <button id="button16" class="gridButton">16x16</button>
-      <button id="button32" class="gridButton">32x32</button>
-      <button id="button64" class="gridButton">64x64</button>
+    <div class="container">
+      <div class="navbar">
+        <input id="color-chooser" type="color" value="#000000" />
+        <button id="color-button">Choose Color</button>
+        <button id="rgb-button">Random Color</button>
+        <button id="eraser-button">Eraser</button>
+        <button id="clear-button">Clear</button>
+        <div class="gridButton-container">
+          <button id="button16" class="gridButton">16x16</button>
+          <button id="button32" class="gridButton">32x32</button>
+          <button id="button64" class="gridButton">64x64</button>
+        </div>
+      </div>
+      <div class="grid-container"></div>
     </div>
-    <div class="grid-container"></div>
   </body>
   <footer class="footer">
     <p>
