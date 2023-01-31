@@ -23,11 +23,14 @@ function setGridSize(newSize) {
 const grid = document.querySelector(".grid-container");
 const colorChooser = document.querySelector("#color-chooser");
 const clearButton = document.querySelector("#clear-button");
-const slider = document.querySelector(".slider");
-const sliderVal = document.querySelector(".slider-value");
+//var slider = document.querySelector(".slider");
+//var sliderVal = document.querySelector(".slider-value");
 const rgbButton = document.querySelector("#rgb-button");
 const colorButton = document.querySelector("#color-button");
 const eraserButton = document.querySelector("#eraser-button");
+const button16 = document.querySelector("#button16");
+const button32 = document.querySelector("#button32");
+const button64 = document.querySelector("#button64");
 
 //lines 33-59 will give each button an addeventlistener
 //and function based on needs of what button should do
@@ -47,16 +50,18 @@ eraserButton.addEventListener("click", () => {
   setMode("eraser");
 });
 
-slider.addEventListener("mousemove", function (input) {
-  updateSliderText(input.target.value);
-});
-
-slider.addEventListener("change", function (input) {
-  sizeChange(input.target.value);
-});
-
 clearButton.addEventListener("click", () => {
   refreshPage();
+});
+
+button16.addEventListener("click", () => {
+  sizeChange(16);
+});
+button32.addEventListener("click", () => {
+  sizeChange(32);
+});
+button64.addEventListener("click", () => {
+  sizeChange(64);
 });
 
 //This chunk of code is created to give mouseDown a boolean value
@@ -65,15 +70,10 @@ let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
-//this will update grid text accordingly to slider input value
-function updateSliderText(value) {
-  sliderVal.innerHTML = `${value} x ${value}`;
-}
-
 //this will update gridsize, slidertext, and will clear the grid
 function sizeChange(value) {
   setGridSize(value);
-  updateSliderText(value);
+  //updateSliderText(value);
   refreshPage();
 }
 
@@ -98,7 +98,7 @@ function createGrid(value) {
   grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
 
   for (let i = 0; i < value * value; i++) {
-    const gridDiv = document.createElement("div");
+    let gridDiv = document.createElement("div");
     gridDiv.classList.add("cell");
     gridDiv.addEventListener("mouseover", changeColor);
     gridDiv.addEventListener("mousedown", changeColor);

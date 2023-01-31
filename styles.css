@@ -4,9 +4,7 @@ body {
   align-items: center;
   flex-direction: column;
 }
-.slider {
-  background-color: turquoise;
-}
+
 .navbar {
   display: flex;
 }
