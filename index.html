@@ -15,15 +15,21 @@
     </header>
     <div class="container">
       <div class="navbar">
-        <input id="color-chooser" type="color" value="#000000" />
-        <button id="color-button">Choose Color</button>
-        <button id="rgb-button">Random Color</button>
-        <button id="eraser-button">Eraser</button>
-        <button id="clear-button">Clear</button>
-        <div class="gridButton-container">
-          <button id="button16" class="gridButton">16x16</button>
-          <button id="button32" class="gridButton">32x32</button>
-          <button id="button64" class="gridButton">64x64</button>
+        <div class="color-chooser-container">
+          <input id="color-chooser" type="color" value="#000000" />
+          <span>Pen Color</span>
+        </div>
+        <button id="color-button" class="navButton">Choose Color</button>
+        <button id="rgb-button" class="navButton">Random Color</button>
+        <button id="eraser-button" class="navButton">Eraser</button>
+        <button id="clear-button" class="navButton">Clear</button>
+        <div class="grid-chooser-container">
+          <span>Choose Grid Size</span>
+          <div class="gridButton-container">
+            <button id="button16" class="gridButton">16x16</button>
+            <button id="button32" class="gridButton">32x32</button>
+            <button id="button64" class="gridButton">64x64</button>
+          </div>
         </div>
       </div>
       <div class="grid-container"></div>
