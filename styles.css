@@ -1,25 +1,31 @@
 body {
   background-color: #b9cbd9;
+  font-family: "Lobster", cursive;
 }
 
 .container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  gap: 200px;
-  margin: 0 auto;
+  gap: 5%;
+  margin: auto;
   max-width: 1300px;
+}
+
+span {
+  font-size: 20px;
 }
 .title {
   text-align: center;
+  font-size: 50px;
 }
 .navbar {
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
   flex-direction: column;
   background-color: #d7e2e8;
-  gap: 50px;
+  gap: 10px;
   border-radius: 5px;
   height: 644px;
 }
@@ -42,46 +48,95 @@ body {
   margin-left: 0;
   width: 200px;
   border-radius: 5px;
+  background-color: #d7e2e8;
+  border: 4px solid #fcc9c5;
+  transition-duration: 0.1s;
 }
 
 input[type="color"] {
-  height: 41px;
-  width: 100px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 120px;
+  width: 120px;
   border: none;
-  padding: 0px;
-  margin: 0px;
-  outline: none;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
+  cursor: pointer;
 }
+
+input[type="color"]::-webkit-color-swatch {
+  border-radius: 50%;
+  border: rgba(0, 0, 0, 0.24);
+}
+
 .color-chooser-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  width: 100%;
+  height: 30%;
+  gap: 5px;
+  padding: 50px 0 0 0;
 }
 .gridButton {
   width: 64px;
   border-radius: 5px;
   padding: 10px;
+  border-radius: 5px;
+  background-color: #d7e2e8;
+  border: 4px solid #fcc9c5;
 }
 .gridButton-container {
-  padding: 2px 2px;
-  margin: 2px 1px;
+  padding: 10px 5px;
+  margin: 10px 5px;
   margin-left: 0;
+}
+.grid-chooser-container {
+  padding: 20px 5px;
+}
+.grid-choose-text {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 .cell {
   background-color: white;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
 }
 
 button.active {
-  background-color: #cfe3e2;
+  background-color: #fcc9c5;
+  border-radius: 5px;
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  transform: translateY(4px);
 }
 
 .gridButton.active {
-  background-color: #cfe3e2;
+  background-color: #fcc9c5;
+  border-radius: 5px;
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  transform: translateY(4px);
+}
+#clear-button:active {
+  transform: translateY(4px);
+}
+
+button:hover {
+  background-color: #fcc9c5;
+}
+
+#clear-button.active {
+  background-color: #fcc9c5;
+  border-radius: 5px;
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  transform: translateX(4px);
 }
 .footer {
   text-align: center;
+}
+
+#github-icon {
+  height: 20px;
+  width: 20px;
 }
